@@ -48,8 +48,14 @@ router.get('/getFoodByKeyword', (req,res) => {
     })
 })
 
-router.post('/hello' , (req , res) => {
-    var name = req.body.name;
-    res.send(name);
+router.get('/getTrangMieng' , (req , res) => {
+    pool.query(`SELECT id, "foodName", price, "dateCreated", image, "dateEdit", type, "order"
+	FROM public."Food" 
+	where type = 3`, (err, data) => {
+    
+        console.log(data);
+        
+         res.json({data : data.rows});
+       })
 })
 module.exports = router;
