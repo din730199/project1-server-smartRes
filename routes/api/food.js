@@ -32,7 +32,7 @@ router.get('/getFoodByType', (req,res) => {
 /*
     @URL = api/Food/getFoodByType
     @method = GET
-    @params = keyword
+    @params = name
     @res = data[]
 */
 router.get('/getFoodByKeyword', (req,res) => {
@@ -48,5 +48,8 @@ router.get('/getFoodByKeyword', (req,res) => {
     })
 })
 
-
+router.post('/hello' , (req , res) => {
+    var name = req.body.name;
+    res.send(name);
+})
 module.exports = router;
