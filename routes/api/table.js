@@ -16,3 +16,5 @@ router.get('/getTableByType', (req,res) => {
         res.json({data : data.rows});
       })
 })
+
+module.exports = router;
