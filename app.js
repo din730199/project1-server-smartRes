@@ -10,6 +10,7 @@ var apiUser = require('./routes/api/user');
 var apiChatBot = require('./routes/api/chatBot');
 var apiFood = require('./routes/api/food');
 var apiBill = require('./routes/api/bill');
+var apiTable = require('./routes/api/table');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use('/api/user', apiUser);
 app.use('/api/chatBot', apiChatBot);
 app.use('/api/food', apiFood);
 app.use('/api/bill', apiBill);
+app.use('/api/table',apiTable);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
