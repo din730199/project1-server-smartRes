@@ -5,7 +5,7 @@ const pool = require('../../connectDB/connectDB');
 /*
     @URL = api/table/getTableByType
     @method = GET
-    @params = type
+    @params = idType
     @res = data[]
 */
 router.get('/getTableByType', (req,res) => {
