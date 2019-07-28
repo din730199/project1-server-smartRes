@@ -14,7 +14,7 @@ router.get('/getTableByType', (req,res) => {
     {
         res.json({msg : "Tham số null hoặc undefined"});
     }
-    pool.query(`SELECT * FROM public."TableRes" tr, public."typeTable" tt where tr."idType" = tt."id" AND tr."idType" = $1`,[idType], (err, data) => {
+    pool.query(`SELECT * FROM public."TableRes" tr, public."typeTable" tt where tr."idType" = tt."id" AND tt."id" = $1`,[idType], (err, data) => {
        
         res.json({data : data.rows});
       })
