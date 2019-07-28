@@ -9,8 +9,8 @@ const pool = require('../../connectDB/connectDB');
     @res = data[]
 */
 router.get('/getTableByType', (req,res) => {
-    var idType = req.query.idType;
-    if(type === null || type === undefined)
+    var idType = req.query.idsType;
+    if(idType === null || idType === undefined)
     {
         res.json({msg : "Tham số null hoặc undefined"});
     }
