@@ -11,7 +11,7 @@ var apiChatBot = require('./routes/api/chatBot');
 var apiFood = require('./routes/api/food');
 var apiBill = require('./routes/api/bill');
 var apiTable = require('./routes/api/table');
-
+var apiHello = require('./routes/api/hello')
 var app = express();
 
 // view engine setup
@@ -31,6 +31,7 @@ app.use('/api/chatBot', apiChatBot);
 app.use('/api/food', apiFood);
 app.use('/api/bill', apiBill);
 app.use('/api/table',apiTable);
+app.use('/api/hello',apiHello)
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
