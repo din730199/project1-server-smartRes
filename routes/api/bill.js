@@ -51,10 +51,7 @@ router.get('/getBillByTableId', (req,res) => {
      ORDER BY total DESC`, (err, data) => {
         
           console.log(data);
-         if(err)
-         {
-          res.status(501).json({msg : 'Server Error'});
-         }
+        
           
          res.status(200).json({data : data.rows});
          })
