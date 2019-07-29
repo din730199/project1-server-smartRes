@@ -29,4 +29,10 @@ router.get('/getBillByTableId', (req,res) => {
         }
   })
 
+  router.get('/getAllBill',(req,res) => {
+      pool.query(`SELECT * FROM public."Bill"`,(err,data) => {
+          res.status(200).json({data : data.rows});
+      })
+  })
+
 module.exports = router;
