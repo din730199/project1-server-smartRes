@@ -36,6 +36,9 @@ router.get('/getBillByTableId', (req,res) => {
   })
   router.get('/getSumPriceByDatePay' , (req,res) => {
       var date = req.query.date;
+      if(date===null|| date === undefined){
+        res.status(501).json({msg : 'Phai nhap date'});
+      }
       pool.query(`SELECT
       id,
       SUM ("sumPrice") AS total
