@@ -39,7 +39,7 @@ router.get('/getBillByTableId', (req,res) => {
       if(date===null|| date === undefined){
         res.status(501).json({msg : 'Phai nhap date'});
       }
-      try {
+      else{
         pool.query(`SELECT
         id,
         SUM ("sumPrice") AS total
@@ -55,9 +55,11 @@ router.get('/getBillByTableId', (req,res) => {
           
          res.status(200).json({data : data.rows});
          })
-      } catch (error) {
-        res.status(501).json({msg : 'Server Error'});
       }
+       
+      
+       
+      
       
   })
 module.exports = router;
