@@ -34,5 +34,25 @@ router.get('/getBillByTableId', (req,res) => {
           res.status(200).json({data : data.rows});
       })
   })
-
+  router.get('/getSumPriceByDatePay' , (req,res) => {
+      var date = req.query.date;
+      pool.query(`SELECT
+      id,
+      SUM ("sumPrice") AS total
+   FROM
+      public."Bill" b
+      WHERE "datePay" = '${date}'
+   GROUP BY
+      id
+   ORDER BY total DESC`, (err, data) => {
+      
+        console.log(data);
+       if(err)
+       {
+        res.status(501).json({msg : 'Server Error'});
+       }
+        
+       res.status(200).json({data : data.rows});
+       })
+  })
 module.exports = router;
