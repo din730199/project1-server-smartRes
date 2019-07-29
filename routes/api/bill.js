@@ -41,14 +41,11 @@ router.get('/getBillByTableId', (req,res) => {
       }
       else{
         pool.query(`SELECT
-        id,
         SUM ("sumPrice") AS total
      FROM
-        public."Bill" b
-        WHERE "datePay" = '${date}'
-     GROUP BY
-        id
-     ORDER BY total DESC`, (err, data) => {
+           public."Bill"
+     WHERE
+        "datePay" = '${date}'`, (err, data) => {
         
           console.log(data);
         
