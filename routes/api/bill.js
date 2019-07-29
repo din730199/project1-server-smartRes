@@ -39,23 +39,28 @@ router.get('/getBillByTableId', (req,res) => {
       if(date===null|| date === undefined){
         res.status(501).json({msg : 'Phai nhap date'});
       }
-      pool.query(`SELECT
-      id,
-      SUM ("sumPrice") AS total
-   FROM
-      public."Bill" b
-      WHERE "datePay" = '${date}'
-   GROUP BY
-      id
-   ORDER BY total DESC`, (err, data) => {
-      
-        console.log(data);
-       if(err)
-       {
-        res.status(501).json({msg : 'Server Error'});
-       }
+      try {
+        pool.query(`SELECT
+        id,
+        SUM ("sumPrice") AS total
+     FROM
+        public."Bill" b
+        WHERE "datePay" = '${date}'
+     GROUP BY
+        id
+     ORDER BY total DESC`, (err, data) => {
         
-       res.status(200).json({data : data.rows});
-       })
+          console.log(data);
+         if(err)
+         {
+          res.status(501).json({msg : 'Server Error'});
+         }
+          
+         res.status(200).json({data : data.rows});
+         })
+      } catch (error) {
+        res.status(501).json({msg : 'Server Error'});
+      }
+      
   })
 module.exports = router;
