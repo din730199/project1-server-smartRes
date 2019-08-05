@@ -76,6 +76,9 @@ router.post('/postSignup.marvelTeam', function(req, res, next) {
     {
         res.json({msg : "Email sai định dạng !!!"})
     }
+    else if(userObj.password!=userObj.repassword){
+        res.json({msg : "Mật khẩu không trùng !!!"})
+    }
     else
     {
         pool.query('INSERT INTO public."Customer"(email, password, name) VALUES ($1, $2, $3)',[userObj.email,userObj.password,userObj.name], (err, data) => {
