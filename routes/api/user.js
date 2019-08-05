@@ -72,9 +72,13 @@ router.post('/postSignup.marvelTeam', function(req, res, next) {
     {
         res.json({msg : "Lỗi hệ thống !!!"})
     }
+    else if(!validateEmail(userObj.email))
+    {
+        res.json({msg : "Email sai định dạng !!!"})
+    }
     else
     {
-        pool.query('INSERT INTO public."Users"(email, password, name) VALUES ($1, $2, $3)',[userObj.email,userObj.password,userObj.name], (err, data) => {
+        pool.query('INSERT INTO public."Customer"(email, password, name) VALUES ($1, $2, $3)',[userObj.email,userObj.password,userObj.name], (err, data) => {
           
             if (err) {
                 res.json({msg : "Email đã được đăng ký !!!"})
