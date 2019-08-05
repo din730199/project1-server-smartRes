@@ -47,7 +47,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
      WHERE
         "datePay" = '${date}'`, (err, data) => {
         
-          console.log(data);
+          console.log(data + 'bb');
         
           
          res.status(200).json({data : data.rows});
