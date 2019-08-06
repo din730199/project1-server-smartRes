@@ -23,11 +23,15 @@ router.post('/checkLogin.marvelTeam', function(req, res, next) {
     {
         res.json({msg : "Lỗi hệ thống !!!"})
     }
+    else if(!validateEmail(userObj.email))
+    {
+        res.json({msg : "Email sai định dạng !!!"})
+    }
     else
     {
         pool.connect((err, client, done) => {
             if (err) throw err
-            client.query('SELECT * FROM public."Users" where email = $1 and password = $2',[userObj.email,userObj.password], (err, data) => {
+            client.query('SELECT * FROM public."Customer" where email = $1 and password = $2',[userObj.email,userObj.password], (err, data) => {
                 console.log(data.rows);
                 
                 if(data.rows.length !== 0)
@@ -71,7 +75,7 @@ router.post('/postSignup.marvelTeam', function(req, res, next) {
         res.json({msg : "Email sai định dạng !!!"})
     }
     else if(userObj.password!=userObj.repassword){
-        res.json({msg : "Mật khẩu không trùng !!!"})
+        res.json({msg : "Nhập lại mật khẩu không đúng !!!"})
     }
     else
     {
@@ -113,7 +117,7 @@ router.post('/changePassword.marvelTeam', (req,res) => {
         msg = [...msg,"Email sai định dạng !!!"];
       }
       else{
-        pool.query('UPDATE public."Users" SET password=$1 WHERE email=$2 AND password=$3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
+        pool.query('UPDATE public."Customer" SET password=$1 WHERE email=$2 AND password=$3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
             console.log(data);
             
             if (data.rowCount === 0) {
