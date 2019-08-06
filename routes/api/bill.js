@@ -63,7 +63,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
           sumPrice = req.query.sumPrice
       }
 
-    if(billObj.datePay===null||billObj.status===null||billObj.idTable===null||billObj.foodID===null||billObj.sumPrice===null)
+    if(billObj.datePay===null||billObj.status===null||billObj.idTable===null||billObj.foodID===null||billObj.sumPrice===null|| billObj.datePay===undefined||billObj.status===undefined||billObj.idTable===undefined||billObj.foodID===undefined||billObj.sumPrice===undefined)
     {
         res.json({msg : "Lỗi hệ thống !!!"})
     }
