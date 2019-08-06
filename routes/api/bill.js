@@ -63,6 +63,11 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
           sumPrice = req.query.sumPrice
       }
 
+    if(billObj.datePay===null||billObj.status===null||billObj.idTable===null||billObj.foodID===null||billObj.sumPrice===null)
+    {
+        res.json({msg : "Lỗi hệ thống !!!"})
+    }
+    else{
       pool.query('INSERT INTO public."Bill"("datePay", status, "idTable", [foodID], "sumPrice")VALUES ($1,$2,$3,$4,$5);',[billObj.datePay,billObj.status,billObj.idTable,billObj.foodID,billObj.sumPrice], (err, data) => {
         
           if (err) {
@@ -72,7 +77,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
           }
          
           
-        })
+        })}
   })
     
 module.exports = router;
