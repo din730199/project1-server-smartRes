@@ -54,6 +54,22 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
          })
       }
     })
+  
+  router.post('/postBill', (req , res) => {
+    var Bill = {
+      datePay : req.body.datePay,
+      status : req.body.status,
+      idTable : req.body.idTable,
+      sumPrice : req.body.sumPrice
+    }
+
     
+
+    pool.query(`INSERT INTO public."Bill"(
+       "datePay", status, "idTable", "sumPrice")
+      VALUES ( ${Bill.datePay}, ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice});` ,(err,data) => {
+          console.log(data);
+      })
+  })
     
 module.exports = router;
