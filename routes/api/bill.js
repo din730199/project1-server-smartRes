@@ -72,7 +72,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
       pool.query('INSERT INTO public."Bill"("datePay", status, "idTable", [foodID], "sumPrice")VALUES ($1,$2,$3,$4,$5);',[billObj.datePay,billObj.status,billObj.idTable,myJSON,billObj.sumPrice], (err, data) => {
         
           if (err) {
-              res.json({msg : "Erro"})
+              res.json({msg : "Error"})
           } else {
               res.json({msg : "Thành công !!!"})
           }
