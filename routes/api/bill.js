@@ -56,19 +56,20 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     })
     router.post('/addBill', (req,res)=> {
       var billObj={
-          datePay = req.query.datePay,
+          datePay = new Date(),
           status = req.query.status,
           idTable = req.query.idTable,
           foodID = req.query.foodID,
           sumPrice = req.query.sumPrice
       }
+      var myJSON = JSON.stringify(billObj.foodID);
 
     if(billObj.datePay===null||billObj.status===null||billObj.idTable===null||billObj.foodID===null||billObj.sumPrice===null|| billObj.datePay===undefined||billObj.status===undefined||billObj.idTable===undefined||billObj.foodID===undefined||billObj.sumPrice===undefined)
     {
         res.json({msg : "Lỗi hệ thống !!!"})
     }
     else{
-      pool.query('INSERT INTO public."Bill"("datePay", status, "idTable", [foodID], "sumPrice")VALUES ($1,$2,$3,$4,$5);',[billObj.datePay,billObj.status,billObj.idTable,billObj.foodID,billObj.sumPrice], (err, data) => {
+      pool.query('INSERT INTO public."Bill"("datePay", status, "idTable", [foodID], "sumPrice")VALUES ($1,$2,$3,$4,$5);',[billObj.datePay,billObj.status,billObj.idTable,myJSON,billObj.sumPrice], (err, data) => {
         
           if (err) {
               res.json({msg : "Error"})
