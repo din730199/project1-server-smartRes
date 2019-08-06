@@ -44,12 +44,6 @@ router.post('/checkLogin.marvelTeam', function(req, res, next) {
 
         
     }
-    
-    
-      
-
-      
-     
 });
 
 /* POST sign up. */
