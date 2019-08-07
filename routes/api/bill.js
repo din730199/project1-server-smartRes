@@ -59,6 +59,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     var Bill = {
       datePay : req.body.datePay,
       status : req.body.status,
+      idFood : req.body.idFood,
       idTable : req.body.idTable,
       sumPrice : req.body.sumPrice
     }
