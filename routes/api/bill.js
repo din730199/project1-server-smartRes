@@ -67,13 +67,14 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     try {
       pool.query(`INSERT INTO public."Bill"(
         "datePay", status, "idTable", "sumPrice")
-       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice});` ,(err,data) => {
+       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice}) 
+       SELECT @@IDENTITY;` ,(err,data) => {
            if(data === undefined)
            {
             res.json({msg : "add failed"});
            }
            else{
-            res.json({msg : "add successful"});
+            res.json({msg : data.rows});
            }
            
        })
