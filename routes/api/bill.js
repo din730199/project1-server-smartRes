@@ -83,14 +83,14 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
 
        if(data.rowCount === 1){
         await pool.query(`SELECT
-       MAX(id) from public."Bill"`, (err, data) => {
+       MAX(id) from public."Bill"`, async (err, data) => {
         console.log(data.rows);
-        await arrayFood.forEach( async element => {
+         await arrayFood.forEach( async element => {
           console.log(data.rows.max);
-        //   await pool.query(`INSERT INTO public."DetailsBill"(
-        //     "idBill", "idFood", amount)
-        //     VALUES (${data.rows.max}, ${element.id}, ${element.sl})`)
-        // });
+          await pool.query(`INSERT INTO public."DetailsBill"(
+            "idBill", "idFood", amount)
+            VALUES (${data.rows.max}, ${element.id}, ${element.sl})`)
+        });
        
          
         
