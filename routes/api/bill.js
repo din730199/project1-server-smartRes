@@ -64,12 +64,41 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     }
 
     var arrayFood = req.body.arrayFood ;
+    /* 
+      [
+        {
+          id,
+          sl
+        }
+      ]
+    */
     
     try {
      var data = await pool.query(`INSERT INTO public."Bill"(
         "datePay", status, "idTable", "sumPrice")
        VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice})` );
-       res.json(data);
+
+       
+
+       if(data.rowCount === 1){
+        await pool.query(`SELECT
+       MAX(id) from public."Bill"`, (err, data) => {
+
+        await arrayFood.forEach( async element => {
+          await pool.query(`INSERT INTO public."DetailsBill"(
+            "idBill", "idFood", amount)
+            VALUES (${data.rows.id}, ${element.id}, ${element.sl})`)
+        });
+       
+         
+        
+        })
+
+        res.json({msg : 'insert successfull'});
+       }
+       else{
+        res.json({msg : 'insert falied'});
+       }
     } catch (error) {
       res.json({msg : "server error"})
     }
