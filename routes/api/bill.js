@@ -86,10 +86,10 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
        MAX(id) from public."Bill"`, async (err, data) => {
         console.log(data.rows);
          await arrayFood.forEach( async element => {
-          console.log(data.rows.max);
+          console.log(data.rows[0].max);
           await pool.query(`INSERT INTO public."DetailsBill"(
             "idBill", "idFood", amount)
-            VALUES (${data.rows.max}, ${element.id}, ${element.sl})`)
+            VALUES (${data.rows[0].max}, ${element.id}, ${element.sl})`)
         });
        
          
