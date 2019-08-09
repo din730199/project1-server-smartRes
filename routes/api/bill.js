@@ -55,29 +55,21 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
       }
     })
   
-  router.post('/postBill', (req , res) => {
+  router.post('/postBill', async (req , res) => {
     var Bill = {
       datePay : req.body.datePay,
       status : req.body.status,
-      idFood : req.body.idFood,
       idTable : req.body.idTable,
       sumPrice : req.body.sumPrice
     }
 
+    var arrayFood = req.body.arrayFood ;
     
     try {
-      pool.query(`INSERT INTO public."Bill"(
+     var data = await pool.query(`INSERT INTO public."Bill"(
         "datePay", status, "idTable", "sumPrice")
-       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice})` ,(err,data) => {
-           if(data === undefined)
-           {
-            res.json({msg : "add failed"});
-           }
-           else{
-            res.json({msg : "add successful"});
-           }
-           
-       })
+       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice})` );
+       res.json(data);
     } catch (error) {
       res.json({msg : "server error"})
     }
