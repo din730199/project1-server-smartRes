@@ -64,6 +64,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     }
 
     var arrayFood = req.body.arrayFood ;
+    console.log(arrayFood);
     /* 
       [
         {
@@ -83,12 +84,12 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
        if(data.rowCount === 1){
         await pool.query(`SELECT
        MAX(id) from public."Bill"`, (err, data) => {
-
-        await arrayFood.forEach( async element => {
-          await pool.query(`INSERT INTO public."DetailsBill"(
-            "idBill", "idFood", amount)
-            VALUES (${data.rows.id}, ${element.id}, ${element.sl})`)
-        });
+        console.log(data.rows.id)
+        // await arrayFood.forEach( async element => {
+        //   await pool.query(`INSERT INTO public."DetailsBill"(
+        //     "idBill", "idFood", amount)
+        //     VALUES (${data.rows.id}, ${element.id}, ${element.sl})`)
+        // });
        
          
         
