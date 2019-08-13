@@ -58,7 +58,9 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     router.get('/changeStatus' ,(req,res) => {
       var id = req.query.id;
   
-         pool.query(`UPDATE public."Bill" SET status=true WHERE id=${id};`, (err, data) => {
+         pool.query(`UPDATE public."Bill"
+         SET status=true
+         WHERE id=${id};`, (err, data) => {
           res.json({msg : 'successfull'});
          })
       
