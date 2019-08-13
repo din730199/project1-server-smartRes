@@ -12,7 +12,7 @@ router.get('/getTableByType', (req,res) => {
     var idType = req.query.idType;
     if(idType === null || idType === undefined)
     {
-        res.json({msg : "Tham số nul hoặc undefined"});
+        res.json({msg : "Tham số null hoặc undefined"});
     }
     else{
         pool.query(`SELECT * FROM public."TableRes" tr, public."typeTable" tt where tr."idType" = tt."id" AND tt."id" = $1`,[idType], (err, data) => {
