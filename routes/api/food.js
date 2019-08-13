@@ -8,10 +8,15 @@ const pool = require('../../connectDB/connectDB');
     @res = data[]
 */
 router.get('/getAllFood', (req,res) => {
-    pool.query('SELECT f.* FROM public."Food" f, public."typeFood" tf where f.type = tf.id', (err, data) => {
+    try {
+        pool.query('SELECT f.* FROM public."Food" f, public."typeFood" tf where f.type = tf.id', (err, data) => {
        
-        res.json({data : data.rows});
-      })
+            res.json({data : data.rows});
+          })
+    } catch (error) {
+        res.json({msg : "server error"})
+    }
+    
 })
 
 /*
@@ -22,7 +27,9 @@ router.get('/getAllFood', (req,res) => {
 */
 router.get('/getFoodByType', (req,res) => {
     var type = req.query.type;
-    if(type === null || type === undefined)
+
+    try {
+        if(type === null || type === undefined)
     {
         res.json({msg : "Tham số type null hoặc undefined"});
     }
@@ -30,6 +37,10 @@ router.get('/getFoodByType', (req,res) => {
        
         res.json({data : data.rows});
       })
+    } catch (error) {
+        res.json({msg : "server error"})
+    }
+    
 })
 
 /*
