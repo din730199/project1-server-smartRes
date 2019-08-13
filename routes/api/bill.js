@@ -56,7 +56,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     })
 
     router.get('/changeStatus' , async (req,res) => {
-      var id = req.query.e;
+      var id = req.query.id;
   
         await pool.query(`UPDATE public."Bill"
         SET status=true
