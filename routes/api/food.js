@@ -33,7 +33,7 @@ router.get('/getFoodByType', (req,res) => {
     {
         res.json({msg : "Tham số type null hoặc undefined"});
     }
-    pool.query('SELECT f.* , tf."typeName" FROM public."Food" f, public."typeFood" tf where f.type = tf.id AND f.type = $1',[type], (err, data) => {
+    pool.query(`SELECT f.* , tf."typeName" FROM public."Food" f, public."typeFood" tf where f.type = tf.id AND f.type = ${type}`, (err, data) => {
        
         res.json({data : data.rows});
       })
