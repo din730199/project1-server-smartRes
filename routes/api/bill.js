@@ -54,6 +54,22 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
          })
       }
     })
+
+    router.get('/changeStatus' , (req,res) => {
+      var id = req.query.id;
+      if(date===null|| date === undefined){
+        res.status(501).json({msg : 'Phai nhap id'});
+      }
+      else{
+        pool.query(`UPDATE public."Bill"
+        SET status=true
+        WHERE id=${id};`, (err, data) => {
+          pool.query(`SELECT * FROM public."Bill"`,(err,data) => {
+            res.status(200).json({data : data.rows});
+        })
+         })
+      }
+    })
   
   router.post('/postBill', async (req , res) => {
     var Bill = {
