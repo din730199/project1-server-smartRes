@@ -136,7 +136,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
   router.get('/sumByMonth' ,(req,res) => {
 
     try {
-      pool.query(`SELECT date_trunc('month', "datePay") AS txn_month, sum("sumPrice") as monthly_sum
+      pool.query(`SELECT date_trunc('month', "datePay") AS txn_month, sum("sumPrice") as month_sum
       FROM public."Bill"
   GROUP BY date_trunc('month', "datePay")`, (err, data) => {
         res.status(200).json({data : data.rows});
@@ -152,9 +152,25 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
   router.get('/sumByYear' ,(req,res) => {
 
     try {
-      pool.query(`SELECT date_trunc('year', "datePay") AS txn_year, sum("sumPrice") as monthly_sum
+      pool.query(`SELECT date_trunc('year', "datePay") AS txn_year, sum("sumPrice") as year_sum
       FROM public."Bill"
   GROUP BY date_trunc('year', "datePay")`, (err, data) => {
+        res.status(200).json({data : data.rows});
+       })
+    } catch (error) {
+      res.json({msg : "server error"})
+    }
+       
+    
+    
+  })
+
+  router.get('/sumByWeek' ,(req,res) => {
+
+    try {
+      pool.query(`SELECT date_trunc('week', "datePay") AS txn_week, sum("sumPrice") as week_sum
+      FROM public."Bill"
+  GROUP BY date_trunc('week', "datePay")`, (err, data) => {
         res.status(200).json({data : data.rows});
        })
     } catch (error) {
