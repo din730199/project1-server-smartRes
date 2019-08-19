@@ -118,5 +118,19 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     }
     
   })
+
+  router.get('/sumByDay' ,(req,res) => {
+
+    try {
+      pool.query(`SELECT SUM("sumPrice") FROM public."Bill" where "datePay" = date('now') `, (err, data) => {
+        res.status(200).json({data : data.rows});
+       })
+    } catch (error) {
+      res.json({msg : "server error"})
+    }
+       
+    
+    
+  })
     
 module.exports = router;
