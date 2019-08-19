@@ -148,5 +148,21 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     
     
   })
+
+  router.get('/sumByYear' ,(req,res) => {
+
+    try {
+      pool.query(`SELECT date_trunc('year', "datePay") AS txn_year, sum("sumPrice") as monthly_sum
+      FROM public."Bill"
+  GROUP BY date_trunc('year', "datePay")`, (err, data) => {
+        res.status(200).json({data : data.rows});
+       })
+    } catch (error) {
+      res.json({msg : "server error"})
+    }
+       
+    
+    
+  })
     
 module.exports = router;
