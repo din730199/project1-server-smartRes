@@ -138,7 +138,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     try {
       pool.query(`SELECT date_trunc('month', "datePay") AS txn_month, sum("sumPrice") as monthly_sum
       FROM public."Bill"
-  GROUP BY txn_month`, (err, data) => {
+  GROUP BY date_trunc('month', "datePay")`, (err, data) => {
         res.status(200).json({data : data.rows});
        })
     } catch (error) {
