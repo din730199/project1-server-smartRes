@@ -38,7 +38,7 @@ router.get('/getBillByTableId', (req,res) => {
         }
         else
         {
-            pool.query(`SELECT * FROM public."Bill" where "emailCustomer" = ${id}`, (err, data) => {
+            pool.query(`SELECT * FROM public."Bill" where "emailCustomer" = '${id}'`, (err, data) => {
       
                 console.log(data);
                 
