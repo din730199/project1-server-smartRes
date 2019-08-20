@@ -195,11 +195,11 @@ router.post('/changePassUser', (req,res)=>{
   
       if(User.email === "" || User.password === "" || User.newPassword === "")
       {
-          msg = [...msg,"Các trường không được để trống !!!"];
+          res.json({msg : "Các trường không được để trống !!!"})
       }
       else if(!validateEmail(User.email))
       {
-        msg = [...msg,"Email sai định dạng !!!"];
+        res.json({msg : "Email sai định dạng !!!"})
       }
       else{
         pool.query(`UPDATE public."Users"
