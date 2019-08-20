@@ -195,7 +195,7 @@ router.post('/changePassUser', (req,res)=>{
     var msg = [];
     
   
-      if(User.email === "" || User.password === "")
+      if(User.email === "" || User.password === "" || User.newPassword === "")
       {
           msg = [...msg,"Các trường không được để trống !!!"];
       }
