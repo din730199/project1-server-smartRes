@@ -191,8 +191,6 @@ router.post('/changePassUser', (req,res)=>{
         password : req.body.password,
         newPassword : req.body.newPassword
     }
-
-    var msg = [];
     
   
       if(User.email === "" || User.password === "" || User.newPassword === "")
@@ -207,16 +205,15 @@ router.post('/changePassUser', (req,res)=>{
         pool.query(`UPDATE public."Users"
         SET password=${User.newPassword}
         WHERE email='${User.email}'AND password='${User.password}';`,(err,data)=>{
-            if (data.rowCount === 0) {
-                msg = [...msg,"Sai mật khẩu !!!"];
+            if (err) {
+                res.json({msg : "Sai mật khẩu !!!"})
                 
             } else {
                 
-                msg = [...msg,"Đổi pass thành công !!!"];
+                res.json({msg : "Đổi pass thành công !!!"})
                 
             }
             
-            res.json({msg : msg});
         })
             
            
