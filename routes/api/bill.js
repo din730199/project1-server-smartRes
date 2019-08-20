@@ -109,7 +109,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     try {
      var data = await pool.query(`INSERT INTO public."Bill"(
         "datePay", status, "idTable", "sumPrice","emailCustomer")
-       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice}, ${Bill.emailCustomer})` );
+       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice}, '${Bill.emailCustomer}')` );
 
        
 
