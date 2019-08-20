@@ -185,25 +185,26 @@ router.post('/changePassword.marvelTeam', (req,res) => {
 
 //changepassword user
 
-router.post('/changePasswordUser', (req,res) => {
-    var userChange = {
+router.post('/changePassUser', (req,res)=>{
+    var User={
         email : req.body.email,
         password : req.body.password,
         newPassword : req.body.newPassword
-    }   
+    }
+
     var msg = [];
     
   
-      if(userChange.email === "" || userChange.password === "")
+      if(User.email === "" || User.password === "")
       {
           msg = [...msg,"Các trường không được để trống !!!"];
       }
-      else if(!validateEmail(userChange.email))
+      else if(!validateEmail(User.email))
       {
         msg = [...msg,"Email sai định dạng !!!"];
       }
       else{
-        pool.query('UPDATE public."Users" SET password=$1 WHERE email=$2 AND password= $3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
+        pool.query('UPDATE public."Customer" SET password=$1 WHERE email=$2 AND password=$3;',[User.newPassword,User.email,User.password], (err, data) => {
             console.log(data);
             
             if (data.rowCount === 0) {
@@ -211,16 +212,13 @@ router.post('/changePasswordUser', (req,res) => {
                 
             } else {
                 
-                msg = [...msg,"Đổi pass thành công !!"];
+                msg = [...msg,"Đổi pass thành công !!!"];
                 
             }
             
             res.json({msg : msg});
           })
       }
-
-     
-
 
 })
 
