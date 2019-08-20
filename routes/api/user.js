@@ -188,12 +188,11 @@ router.post('/changePassword.marvelTeam', (req,res) => {
 router.post('/changePassUser', (req,res)=>{
     var User={
         email : req.body.email,
-        password : req.body.password,
         newPassword : req.body.newPassword
     }
     
   
-      if(User.email === "" || User.password === "" || User.newPassword === "")
+      if(User.email === ""|| User.newPassword === "")
       {
           res.json({msg : "Các trường không được để trống !!!"})
       }
@@ -204,7 +203,7 @@ router.post('/changePassUser', (req,res)=>{
       else{
         pool.query(`UPDATE public."Users"
         SET password=${User.newPassword}
-        WHERE email='${User.email}'AND password='${User.password}';`,(err,data)=>{
+        WHERE email='${User.email}';`,(err,data)=>{
             if (err) {
                 res.json({msg : "Sai mật khẩu !!!"})
                 
