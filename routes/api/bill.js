@@ -92,7 +92,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
       status : req.body.status,
       idTable : req.body.idTable,
       sumPrice : req.body.sumPrice,
-      emailCustomer : req.body.emailCus
+      emailCustomer : req.body.email
     }
 
     var arrayFood = req.body.arrayFood ;
