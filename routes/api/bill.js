@@ -169,6 +169,25 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     
   })
 
+  //sumuser
+  router.get('/thang' ,(req,res) => {
+
+    var email = req.query.email;
+    try {
+      pool.query(`SELECT date_trunc('month', "datePay") AS txn_month, sum("sumPrice") as month_sum
+      FROM public."Bill" where "emailCustomer"='${email}'
+  GROUP BY date_trunc('month', "datePay")`, (err, data) => {
+        res.status(200).json({data : data.rows});
+       })
+    } catch (error) {
+      res.json({msg : "server error"})
+    }
+       
+    
+    
+  })
+
+
   router.get('/sumByYear' ,(req,res) => {
 
     try {
