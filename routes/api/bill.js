@@ -29,8 +29,8 @@ router.get('/getBillByTableId', (req,res) => {
         }
   })
 
-  router.get('/getBillById',(req,res)=>{
-    var id = req.query.id;
+  router.get('/getBillByUser',(req,res)=>{
+    var id = req.query.email;
   
         if(id == null || id == undefined)
         {
@@ -38,7 +38,7 @@ router.get('/getBillByTableId', (req,res) => {
         }
         else
         {
-            pool.query(`SELECT * FROM public."Bill" where "id" = ${id}`, (err, data) => {
+            pool.query(`SELECT * FROM public."Bill" where "emailCustomer" = ${id}`, (err, data) => {
       
                 console.log(data);
                 
