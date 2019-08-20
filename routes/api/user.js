@@ -204,9 +204,9 @@ router.post('/changePassUser', (req,res)=>{
         msg = [...msg,"Email sai định dạng !!!"];
       }
       else{
-        pool.query('UPDATE public."Customer" SET password=$1 WHERE email=$2 AND password=$3;',[User.newPassword,User.email,User.password], (err, data) => {
-            console.log(data);
-            
+        pool.query(`UPDATE public."Users"
+        SET password=${User.newPassword}
+        WHERE email='${User.email}'AND password='${User.password}';`,(err,data)=>{
             if (data.rowCount === 0) {
                 msg = [...msg,"Sai mật khẩu !!!"];
                 
@@ -217,7 +217,10 @@ router.post('/changePassUser', (req,res)=>{
             }
             
             res.json({msg : msg});
-          })
+        })
+            
+           
+        
       }
 
 })
