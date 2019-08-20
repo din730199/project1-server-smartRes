@@ -183,6 +183,8 @@ router.post('/changePassword.marvelTeam', (req,res) => {
 
 })
 
+//changepassword 
+
 // POST change Info User
 router.post('/changeInfoUser.marvelTeam', (req,res) => {
     var UserInfo = {
@@ -218,6 +220,12 @@ router.post('/changeInfoUser.marvelTeam', (req,res) => {
     
 
 
+})
+
+router.get('/getAllUser',(req,res) => {
+    pool.query(`SELECT * FROM public."Users"`,(err,data) => {
+        res.status(200).json({data : data.rows});
+    })
 })
 
 
