@@ -36,7 +36,7 @@ router.post('/checkLogin.marvelTeam', function(req, res, next) {
                 
                 if(data.rows.length !== 0)
                 {
-                    res.json(data.rows);
+                    res.json({data : data.rows});
                 }
                 else{
                     res.json({msg : "Sai email hoặc password !!!"});
@@ -81,7 +81,7 @@ router.post('/checkLoginUser', function(req, res, next) {
                 
                 if(data.rows.length !== 0)
                 {
-                    res.json(data.rows);
+                    res.json({data : data.rows});
                 }
                 else{
                     res.json({msg : "Sai email hoặc password !!!"});
