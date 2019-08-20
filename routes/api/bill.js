@@ -29,6 +29,25 @@ router.get('/getBillByTableId', (req,res) => {
         }
   })
 
+  router.get('/getBillById',(req,res)=>{
+    var id = req.query.id;
+  
+        if(id == null || id == undefined)
+        {
+            res.status(404).json({msg : "Error 404 error"});
+        }
+        else
+        {
+            pool.query(`SELECT * FROM public."Bill" where "id" = ${id}`, (err, data) => {
+      
+                console.log(data);
+                
+                 res.status(200).json({data : data.rows});
+               })
+
+        }
+  })
+
 router.get('/getAllBill',(req,res) => {
       pool.query(`SELECT * FROM public."Bill"`,(err,data) => {
           res.status(200).json({data : data.rows});
