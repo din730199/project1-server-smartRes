@@ -205,7 +205,7 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
   })
 
   //sumuser
-  router.get('/sumByYear' ,(req,res) => {
+  router.get('/nam' ,(req,res) => {
     var email = req.query.email;
     try {
       pool.query(`SELECT date_trunc('year', "datePay") AS txn_year, sum("sumPrice") as year_sum
