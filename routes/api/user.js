@@ -50,6 +50,51 @@ router.post('/checkLogin.marvelTeam', function(req, res, next) {
     }
 });
 
+/* checklogin user */
+router.post('/checkLoginUser', function(req, res, next) {
+
+    
+    var userObj = {
+        email : req.body.email,
+        password : req.body.password
+    }
+    console.log(userObj.email+" : "+userObj.password);
+    
+    if(userObj.email === "" || userObj.password === "" )
+    {
+        res.json({msg : "Email và Password không được để trống !!!"})
+    }
+    else if(userObj.email === null || userObj.password === null || userObj.email === undefined || userObj.password === undefined )
+    {
+        res.json({msg : "Lỗi hệ thống !!!"})
+    }
+    else if(!validateEmail(userObj.email))
+    {
+        res.json({msg : "Email sai định dạng !!!"})
+    }
+    else
+    {
+        pool.connect((err, client, done) => {
+            if (err) throw err
+            client.query('SELECT * FROM public."Users" where email = $1 and password = $2',[userObj.email,userObj.password], (err, data) => {
+                console.log(data.rows);
+                
+                if(data.rows.length !== 0)
+                {
+                    res.json(data.rows);
+                }
+                else{
+                    res.json({msg : "Sai email hoặc password !!!"});
+                }
+               
+                
+              })
+          })
+
+        
+    }
+});
+
 /* POST sign up. */
 router.post('/postSignup.marvelTeam', function(req, res, next) {
     var userObj = {
