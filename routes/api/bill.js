@@ -91,7 +91,8 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
       datePay : req.body.datePay,
       status : req.body.status,
       idTable : req.body.idTable,
-      sumPrice : req.body.sumPrice
+      sumPrice : req.body.sumPrice,
+      emailCustomer : req.body.emailCus
     }
 
     var arrayFood = req.body.arrayFood ;
@@ -107,8 +108,8 @@ router.get('/getSumPriceByDatePay' , (req,res) => {
     
     try {
      var data = await pool.query(`INSERT INTO public."Bill"(
-        "datePay", status, "idTable", "sumPrice")
-       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice})` );
+        "datePay", status, "idTable", "sumPrice","emailCustomer")
+       VALUES ( '${Bill.datePay}', ${Bill.status}, ${Bill.idTable}, ${Bill.sumPrice}, ${Bill.emailCustomer})` );
 
        
 
