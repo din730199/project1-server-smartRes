@@ -183,7 +183,46 @@ router.post('/changePassword.marvelTeam', (req,res) => {
 
 })
 
-//changepassword 
+//changepassword user
+
+router.post('/changePasswordUser', (req,res) => {
+    var userChange = {
+        email : req.body.email,
+        password : req.body.password,
+        newPassword : req.body.newPassword
+    }   
+    var msg = [];
+    
+  
+      if(userChange.email === "" || userChange.password === "")
+      {
+          msg = [...msg,"Các trường không được để trống !!!"];
+      }
+      else if(!validateEmail(userChange.email))
+      {
+        msg = [...msg,"Email sai định dạng !!!"];
+      }
+      else{
+        pool.query('UPDATE public."Users" SET password=$1 WHERE email=$2 AND password=$3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
+            console.log(data);
+            
+            if (data.rowCount === 0) {
+                msg = [...msg,"Sai mật khẩu !!!"];
+                
+            } else {
+                
+                msg = [...msg,"Đổi pass thành công !!!"];
+                
+            }
+            
+            res.json({msg : msg});
+          })
+      }
+
+     
+
+
+})
 
 // POST change Info User
 router.post('/changeInfoUser.marvelTeam', (req,res) => {
