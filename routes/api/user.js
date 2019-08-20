@@ -203,7 +203,7 @@ router.post('/changePasswordUser', (req,res) => {
         msg = [...msg,"Email sai định dạng !!!"];
       }
       else{
-        pool.query('UPDATE public."Users" SET password=$1 WHERE email=$2 AND password=$3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
+        pool.query('UPDATE public."Users" SET password=$1 WHERE email=$2 AND password= $3;',[userChange.newPassword,userChange.email,userChange.password], (err, data) => {
             console.log(data);
             
             if (data.rowCount === 0) {
@@ -211,7 +211,7 @@ router.post('/changePasswordUser', (req,res) => {
                 
             } else {
                 
-                msg = [...msg,"Đổi pass thành công !!!"];
+                msg = [...msg,"Đổi pass thành công !!"];
                 
             }
             
